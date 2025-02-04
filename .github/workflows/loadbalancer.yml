@@ -11,15 +11,17 @@ on:
         required: false
         default: 'true'
       _intloadbalance:
-        required: false
-        default: 'true'
+        type: boolean
+        default: true
       _extloadbalance:
         type: boolean
         default: true
       _intloadbalance_iap:
         type: boolean
+        default: false
       dns_recreate: 
         type: boolean
+        default: false
       OVERRIDE_ENVIRONMENT_LOCK:
         type: boolean  
         default: true
