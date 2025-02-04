@@ -43,7 +43,7 @@ jobs:
            USE_SPINNAKER: "true"
            action_flag: "true"
            NEW_FEATURE_PROVISIONING: "false" 
-        if: ${{ inputs.loadbalancer_update == "true"}}    
+        if: ${{ inputs.loadbalancer_update == 'true' }}    
         run: |-
             #!/bin/bash
             #Spinnaker testing START
