@@ -46,19 +46,20 @@ jobs:
         run: |-
             #!/bin/bash
             #Spinnaker testing START
-            ENVIRONMENT='${{ inputs.environment }}'
+            #ENVIRONMENT='${{ inputs.environment }}'
             ENV_PURPOSE="ci"
             ENV="${ENVIRONMENT}"
             echo "ENV_PURPOSE = ${ENV_PURPOSE}"
             echo "ENV = ${ENV}"
-            _intloadbalance_iap= '{{ inputs._intloadbalance_iap }}'
-            _extloadbalance='{{ inputs._extloadbalance }}'
-            dns_recreate='{{ inputs.dns_recreate }}'
+            _intloadbalance='${{ inputs._intloadbalance }}'
+            _intloadbalance_iap='${{ inputs._intloadbalance_iap }}'
+            _extloadbalance='${{ inputs._extloadbalance }}'
+            dns_recreate='${{ inputs.dns_recreate }}'
             echo " printing lb values ${_intloadbalance} and ${_intloadbalance_iap} and ${_extloadbalance}  "
             #Spinnaker testing END
 
             echo "###Updating component"
-            if [[ "{{ inputs._intloadbalance }}" == "true" ]]; then 
+            if [[ "${_intloadbalance}" == "true" ]]; then 
                 echo " Executing intloadbalance scripts"
             fi
             sleep 3
