@@ -55,11 +55,11 @@ jobs:
             _intloadbalance_iap='${{ inputs._intloadbalance_iap }}'
             _extloadbalance='${{ inputs._extloadbalance }}'
             dns_recreate='${{ inputs.dns_recreate }}'
-            echo " printing lb values ${_intloadbalance} and ${_intloadbalance_iap} and ${_extloadbalance}  "
+            echo " printing lb values _intloadbalance=${_intloadbalance} and _intloadbalance_iap=${_intloadbalance_iap} and _extloadbalance=${_extloadbalance}  "
             #Spinnaker testing END
 
             echo "###Updating component"
-            if [[ "${_intloadbalance}" == "true" ]]; then 
+            if [[ "${{ inputs._intloadbalance }}" == "true" ]]; then 
                 echo " Executing intloadbalance scripts"
             fi
             sleep 3
