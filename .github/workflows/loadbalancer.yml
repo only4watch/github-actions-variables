@@ -1,0 +1,68 @@
+name: environment_loadbalancer_update
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        required: true
+        type: string
+        default: "testing"
+      loadbalancer_update:
+        required: false
+        default: 'true'
+      _intloadbalance:
+        required: false
+        default: 'true'
+      _extloadbalance:
+        type: boolean
+        default: true
+      _intloadbalance_iap:
+        type: boolean
+      dns_recreate: 
+        type: boolean
+      OVERRIDE_ENVIRONMENT_LOCK:
+        type: boolean  
+        default: true
+      
+
+jobs:
+  loadbalancer-update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+
+
+      - name: 'Environmnet Load balancer Update'  
+        env:
+           ENVIRONMENT: '${{ inputs.environment }}'
+           ENV_PURPOSE: "ci"
+           USE_SPINNAKER: "true"
+           action_flag: "true"
+           NEW_FEATURE_PROVISIONING: "false" 
+        run: |-
+            #!/bin/bash
+            #Spinnaker testing START
+            ENVIRONMENT='${{ inputs.environment }}'
+            ENV_PURPOSE="ci"
+            ENV="${ENVIRONMENT}"
+            echo "ENV_PURPOSE = ${ENV_PURPOSE}"
+            echo "ENV = ${ENV}"
+            #Spinnaker testing END
+
+            echo "###Updating component"
+            if [[ "${_intloadbalance}" == 'true' ]]; then 
+                echo " Executing intloadbalance scripts"
+            fi
+            sleep 3
+            if [[ "${_intloadbalance_iap}" == 'true' ]]; then 
+                echo " Executing intloadbalance-iap scripts"
+            fi
+            sleep 3
+            if [[ "${_extloadbalance}" == 'true' ]]; then
+                echo " Executing external loadbalancer scripts"
+            fi
+            if [[ "${dns_recreate}" == 'true' ]]; then
+               echo " Executing DNS  scripts"
+            fi 
