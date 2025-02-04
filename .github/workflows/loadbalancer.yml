@@ -64,13 +64,13 @@ jobs:
                 echo " Executing intloadbalance scripts"
             fi
             sleep 3
-            if [[ "${_intloadbalance_iap}" == "true" ]]; then 
+            if [[ "${{ inputs._intloadbalance_iap }}" == "true" ]]; then 
                 echo " Executing intloadbalance-iap scripts"
             fi
             sleep 3
-            if [[ "${_extloadbalance}" == "true" ]]; then
+            if [[ "${{ inputs._extloadbalance }}" == "true" ]]; then
                 echo " Executing external loadbalancer scripts"
             fi
-            if [[ "${dns_recreate}" == "true" ]]; then
+            if [[ "${{ inputs.dns_recreate }}" == "true" ]]; then
                echo " Executing DNS  scripts"
             fi 
